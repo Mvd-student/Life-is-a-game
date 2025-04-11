@@ -14,7 +14,7 @@
 
 Label{
     -fx-font-family: "Silkscreen", sans-serif;
-   -fx-font-weight: 400;
+    -fx-font-weight: 400;
     -fx-font-style: normal;
     -fx-text-fill: black;
 }
@@ -26,6 +26,11 @@ Label{
 }
 
 .customButton{
+    -fx-font-family: "Silkscreen", sans-serif;
+    -fx-font-weight: 400;
+    -fx-font-style: normal;
+    -fx-text-fill: black;
+
     -fx-background-color: lightgray;
     -fx-border-color: black;
     -fx-border-style: solid;
