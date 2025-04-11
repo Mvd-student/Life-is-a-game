@@ -20,6 +20,8 @@ public class SceneController {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Store");
         stage.setScene(scene);
         stage.show();
     }
@@ -29,6 +31,8 @@ public class SceneController {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Daily Tasks");
         stage.setScene(scene);
         stage.show();
     }
@@ -38,6 +42,8 @@ public class SceneController {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Custom Tasks");
         stage.setScene(scene);
         stage.show();
     }

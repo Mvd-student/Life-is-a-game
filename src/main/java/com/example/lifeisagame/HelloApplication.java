@@ -13,12 +13,12 @@ import java.util.Objects;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DailyTaskList.fxml")));
 
         Scene scene = new Scene(root, 960, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
 
-        stage.setTitle("Hello World");
+        stage.setTitle("Life is a game - Daily Tasks");
         stage.setScene(scene);
         stage.show();
     }
