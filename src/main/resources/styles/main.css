@@ -16,4 +16,21 @@ Label{
     -fx-font-family: "Silkscreen", sans-serif;
    -fx-font-weight: 400;
     -fx-font-style: normal;
+    -fx-text-fill: black;
+}
+
+.customVbox {
+    -fx-background-color: gray;
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+}
+
+.customButton{
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 2, 2);
 }

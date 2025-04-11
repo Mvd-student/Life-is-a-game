@@ -14,7 +14,7 @@
     </padding>
    <VBox prefHeight="72.0" prefWidth="1025.0">
       <children>
-         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Life is a game, let' s play" textAlignment="RIGHT">
+         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Welcome to the Daily task list" textAlignment="RIGHT">
             <font>
                <Font size="43.0" />
             </font>
