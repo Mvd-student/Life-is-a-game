@@ -6,6 +6,8 @@ public class User {
     private String username;
     private int balance;
     private int streak;
+    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private ArrayList<CustomTask> customTasks = new ArrayList<CustomTask>();
     private ArrayList<Item> items = new ArrayList<Item>();
 
     public User(String name, String username, int balance, int streak) {
@@ -48,5 +50,19 @@ public class User {
     }
     public void addItem(Item item) {
         this.items.add(item);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
+
+    public ArrayList<CustomTask> getCustomTasks() {
+        return this.customTasks;
+    }
+    public void addCustomTask(CustomTask customTask) {
+        this.customTasks.add(customTask);
     }
 }

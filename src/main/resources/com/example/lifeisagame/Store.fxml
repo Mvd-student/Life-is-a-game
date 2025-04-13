@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -26,17 +27,27 @@
    <Accordion />
    <VBox alignment="BOTTOM_CENTER" prefHeight="515.0" prefWidth="1025.0">
       <children>
+         <VBox prefHeight="379.0" prefWidth="1025.0">
+            <children>
+               <AnchorPane prefHeight="58.0" prefWidth="1025.0">
+                  <children>
+                     <Button layoutX="754.0" layoutY="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Button" />
+                     <Label layoutX="11.0" layoutY="10.0" prefHeight="40.0" prefWidth="567.0" text="Store item test" />
+                  </children>
+               </AnchorPane>
+            </children>
+         </VBox>
          <HBox alignment="CENTER" spacing="10.0">
             <children>
                <Label text="Current balance:" />
-               <Label text="amount" />
+               <Label fx:id="balanceLabel" text="amount" />
             </children>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" spacing="20.0">
             <children>
-               <Button styleClass="customButton" mnemonicParsing="false" text="Daily tasks" onAction="#goToDailyTaskList"/>
-               <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Custom tasks" onAction="#goToCustomTaskList"/>
-               <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Store" onAction="#goToStore"/>
+               <Button mnemonicParsing="false" onAction="#goToDailyTaskList" styleClass="customButton" text="Daily tasks" />
+               <Button minWidth="100.0" mnemonicParsing="false" onAction="#goToCustomTaskList" styleClass="customButton" text="Custom tasks" />
+               <Button minWidth="100.0" mnemonicParsing="false" onAction="#goToStore" styleClass="customButton" text="Store" />
             </children>
          </HBox>
       </children>
