@@ -13,22 +13,17 @@
    </padding>
    <VBox prefHeight="72.0" prefWidth="1025.0">
       <children>
-         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Welcome to the Store" textAlignment="RIGHT">
+         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Inventory" textAlignment="RIGHT">
             <font>
                <Font size="43.0" />
             </font>
          </Label>
       </children>
    </VBox>
-
-   <VBox fx:id="storeItemsVBox" prefHeight="379.0" prefWidth="1025.0" spacing="10.0">
+   <VBox fx:id="inventoryVBox" prefHeight="379.0" prefWidth="1025.0" spacing="10.0">
       <!-- Store items will be dynamically loaded here -->
    </VBox>
    <HBox alignment="CENTER" spacing="10.0">
-      <children>
-         <Label text="Current balance:" />
-         <Label fx:id="balanceLabel" text="amount" />
-      </children>
    </HBox>
 
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" spacing="20.0">
@@ -36,7 +31,7 @@
          <Button mnemonicParsing="false" onAction="#goToDailyTaskList" styleClass="customButton" text="Daily tasks" />
          <Button mnemonicParsing="false" onAction="#goToCustomTaskList" styleClass="customButton" text="Custom tasks" />
          <Button mnemonicParsing="false" onAction="#goToStore" styleClass="customButton" text="Store" />
-         <Button mnemonicParsing="false" onAction="#goToInventory" styleClass="customButton" text="showInventory" />
+         <Button mnemonicParsing="false" onAction="#goToInventory" styleClass="customButton" text="Inventory" />
       </children>
    </HBox>
 </VBox>
