@@ -65,4 +65,7 @@ public class User {
     public void addCustomTask(CustomTask customTask) {
         this.customTasks.add(customTask);
     }
+    public void removeCustomTask(CustomTask customTask) {
+        this.customTasks.remove(customTask);
+    }
 }

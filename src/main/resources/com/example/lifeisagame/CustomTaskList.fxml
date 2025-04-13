@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
 
 <VBox prefHeight="640.0" prefWidth="1065.0" styleClass="customVbox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lifeisagame.HelloApplication">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+
+   <!-- Title -->
    <VBox prefHeight="72.0" prefWidth="1025.0">
       <children>
-         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Welcome to the Custom task list" textAlignment="RIGHT">
+         <Label alignment="CENTER" prefHeight="51.0" prefWidth="1028.0" text="Welcome to the Custom Task List" textAlignment="RIGHT">
             <font>
                <Font size="43.0" />
             </font>
@@ -22,23 +24,33 @@
       </children>
    </VBox>
 
-    <Label fx:id="welcomeText" />
-   <Accordion />
-   <VBox alignment="BOTTOM_CENTER" prefHeight="515.0" prefWidth="1025.0">
+   <Label fx:id="welcomeText" />
+
+   <!-- Form to Add Custom Tasks -->
+   <HBox alignment="CENTER" spacing="10.0">
       <children>
-         <HBox alignment="CENTER" spacing="10.0">
-            <children>
-               <Label text="Current balance:" />
-               <Label fx:id="balanceLabel" text="amount" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" spacing="20.0">
-            <children>
-               <Button styleClass="customButton" mnemonicParsing="false" text="Daily tasks" onAction="#goToDailyTaskList"/>
-               <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Custom tasks" onAction="#goToCustomTaskList"/>
-               <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Store" onAction="#goToStore"/>
-            </children>
-         </HBox>
+         <TextField fx:id="customTaskNameField" promptText="Enter custom task name" /> <!-- Fix here for fx:id -->
+         <Button text="Add Task" onAction="#addCustomTask" styleClass="customButton"/>
       </children>
-   </VBox>
+   </HBox>
+
+   <!-- List of Custom Tasks -->
+   <ScrollPane fx:id="customTaskScrollPane" fitToHeight="true" fitToWidth="true" prefHeight="371.0" prefWidth="1025.0">
+      <content>
+         <VBox fx:id="customTaskListVBox" spacing="10">
+            <padding>
+               <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+         </VBox>
+      </content>
+   </ScrollPane>
+
+   <!-- Navigation Buttons -->
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" spacing="20.0">
+      <children>
+         <Button styleClass="customButton" mnemonicParsing="false" text="Daily tasks" onAction="#goToDailyTaskList"/>
+         <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Custom tasks" onAction="#goToCustomTaskList"/>
+         <Button styleClass="customButton" minWidth="100.0" mnemonicParsing="false" text="Store" onAction="#goToStore"/>
+      </children>
+   </HBox>
 </VBox>

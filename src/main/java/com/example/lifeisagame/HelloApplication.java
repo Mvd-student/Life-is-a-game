@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,15 +23,12 @@ public class HelloApplication extends Application {
     private Stage stage;
     private Scene scene;
 
-    // Declare the currentUser globally to share across scenes
     User currentUser = new User("Michael", "Ailias", 1000, 0);
 
-    // Example tasks
     Task task1 = new Task("Eat breakfast", 20);
     Task task2 = new Task("Go for a run", 30);
     Task task3 = new Task("Complete a project", 50);
 
-    // Example store items
     Item item1 = new Item("Sword", 200);
     Item item2 = new Item("Shield", 150);
     Item item3 = new Item("Potion", 50);
@@ -42,21 +40,25 @@ public class HelloApplication extends Application {
     private VBox storeItemsVBox;
 
     @FXML
-    private VBox taskListVBox; // Added for task list
+    private VBox taskListVBox;
 
     @FXML
-    private VBox inventoryVBox;  // Added for the inventory items
+    private VBox inventoryVBox;
+
+    @FXML
+    private TextField customTaskNameField;
+
+    @FXML
+    private VBox customTaskListVBox;
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Load the DailyTaskList.fxml and pass currentUser to the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DailyTaskList.fxml"));
         Parent root = loader.load();
 
         HelloApplication controller = loader.getController();
-        controller.setCurrentUser(currentUser);  // Pass currentUser to controller
+        controller.setCurrentUser(currentUser);
 
-        // Add the task only once when the app starts
         if (currentUser.getTasks().isEmpty()) {
             currentUser.addTask(task1);
             currentUser.addTask(task2);
@@ -64,7 +66,7 @@ public class HelloApplication extends Application {
         }
 
         controller.updateBalance();
-        controller.updateTasks();  // Call updateTasks() method
+        controller.updateTasks();
 
         Scene scene = new Scene(root, 960, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
@@ -74,25 +76,20 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    // Setter method to pass the currentUser to each controller
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
-    // Update the balance label in UI
     public void updateBalance() {
         if (balanceLabel != null) {
             balanceLabel.setText(Integer.toString(currentUser.getBalance()));
         }
     }
 
-    // Method to update the store items dynamically
     public void updateStoreItems() {
-        storeItemsVBox.getChildren().clear(); // Clear previous store items
-
+        storeItemsVBox.getChildren().clear();
         List<Item> storeItems = List.of(item1, item2, item3);
 
-        // Display each item in the store
         for (Item item : storeItems) {
             Label nameLabel = new Label(item.getName());
             nameLabel.setPrefWidth(482);
@@ -109,7 +106,7 @@ public class HelloApplication extends Application {
             buyButton.setOnAction(e -> {
                 if (currentUser.getBalance() >= item.getPrice()) {
                     currentUser.setBalance(currentUser.getBalance() - item.getPrice());
-                    updateBalance(); // Update balance after purchase
+                    updateBalance();
                     currentUser.addItem(item);
                     System.out.println("Bought: " + item.getName());
                 } else {
@@ -127,14 +124,11 @@ public class HelloApplication extends Application {
         }
     }
 
-    // Method to update the inventory items dynamically
     public void updateInventoryItems() {
-        inventoryVBox.getChildren().clear(); // Clear previous inventory items
-
-        // Display each item in the user's inventory
+        inventoryVBox.getChildren().clear();
         for (Item item : currentUser.getItems()) {
             Label nameLabel = new Label(item.getName());
-            nameLabel.setPrefWidth(482);  // Adjust this based on your preferred width
+            nameLabel.setPrefWidth(482);
             nameLabel.setPrefHeight(40);
 
             Label priceLabel = new Label("Price: " + item.getPrice());
@@ -150,14 +144,12 @@ public class HelloApplication extends Application {
         }
     }
 
-    // Method to update the task list dynamically (fix for the updateTasks() error)
     public void updateTasks() {
-        taskListVBox.getChildren().clear(); // Clear previous task entries
+        taskListVBox.getChildren().clear();
 
-        // Display the tasks that are in the user's task list
         for (Task task : currentUser.getTasks()) {
             Label nameLabel = new Label(task.getName());
-            nameLabel.setPrefWidth(482);  // Adjust this based on your preferred width
+            nameLabel.setPrefWidth(482);
             nameLabel.setPrefHeight(40);
 
             Button doneButton = new Button("Finished");
@@ -167,11 +159,10 @@ public class HelloApplication extends Application {
 
             doneButton.setOnAction(e -> {
                 System.out.println("Completed: " + task.getName());
-                int newBalance = currentUser.getBalance() + task.getReward();
-                currentUser.setBalance(newBalance);
-                currentUser.getTasks().remove(task); // Remove task from user's list
-                updateBalance(); // Update balance
-                updateTasks(); // Refresh task list visually
+                currentUser.setBalance(currentUser.getBalance() + task.getReward());
+                currentUser.getTasks().remove(task);
+                updateBalance();
+                updateTasks();
             });
 
             HBox taskBox = new HBox(10);
@@ -184,16 +175,14 @@ public class HelloApplication extends Application {
         }
     }
 
-    // Switch to the Store page and pass currentUser to the new controller
     public void goToStore(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Store.fxml"));
         Parent root = loader.load();
 
-        // Pass currentUser to the controller of the new scene
         HelloApplication controller = loader.getController();
-        controller.setCurrentUser(currentUser);  // Pass currentUser to Store page
-        controller.updateBalance();  // Update balance on the store page
-        controller.updateStoreItems(); // Update store items
+        controller.setCurrentUser(currentUser);
+        controller.updateBalance();
+        controller.updateStoreItems();
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
@@ -204,16 +193,14 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    // Switch to the Daily Task List page and pass currentUser to the new controller
     public void goToDailyTaskList(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DailyTaskList.fxml"));
         Parent root = loader.load();
 
-        // Pass currentUser to the controller of the new scene
         HelloApplication controller = loader.getController();
-        controller.setCurrentUser(currentUser);  // Pass currentUser to the Daily Task List page
+        controller.setCurrentUser(currentUser);
         controller.updateBalance();
-        controller.updateTasks();  // Call updateTasks() to refresh tasks
+        controller.updateTasks();
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
@@ -224,15 +211,14 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    // Switch to the Custom Task List page and pass currentUser to the new controller
     public void goToCustomTaskList(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomTaskList.fxml"));
         Parent root = loader.load();
 
-        // Pass currentUser to the controller of the new scene
         HelloApplication controller = loader.getController();
-        controller.setCurrentUser(currentUser);  // Pass currentUser to the Custom Task List page
+        controller.setCurrentUser(currentUser);
         controller.updateBalance();
+        controller.updateCustomTasks();
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
@@ -247,11 +233,10 @@ public class HelloApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Inventory.fxml"));
         Parent root = loader.load();
 
-        // Pass currentUser to the controller of the new scene
         HelloApplication controller = loader.getController();
-        controller.setCurrentUser(currentUser);  // Pass currentUser to the Inventory page
+        controller.setCurrentUser(currentUser);
         controller.updateBalance();
-        controller.updateInventoryItems();  // Update inventory items
+        controller.updateInventoryItems(); // ✅ This is what you want in the Inventory screen
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 960, 720);
@@ -262,7 +247,45 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public void addCustomTask(ActionEvent event) {
+        String taskName = customTaskNameField.getText();
+
+        if (taskName != null && !taskName.trim().isEmpty()) {
+            CustomTask customTask = new CustomTask(taskName, 50);
+            currentUser.addCustomTask(customTask);
+            customTaskNameField.clear();
+            updateCustomTasks();
+        }
+    }
+
+    public void updateCustomTasks() {
+        customTaskListVBox.getChildren().clear();
+
+        for (Task task : currentUser.getCustomTasks()) {
+            Label nameLabel = new Label(task.getName());
+            nameLabel.setPrefWidth(482);
+            nameLabel.setPrefHeight(40);
+
+            Button doneButton = new Button("Finished");
+            doneButton.setPrefWidth(133);
+            doneButton.setPrefHeight(35);
+            doneButton.getStyleClass().add("customButton");
+
+            doneButton.setOnAction(e -> {
+                System.out.println("Completed: " + task.getName());
+                currentUser.setBalance(currentUser.getBalance() + task.getReward());
+                currentUser.getCustomTasks().remove(task);
+                updateBalance();
+                updateCustomTasks();
+            });
+
+            HBox taskBox = new HBox(10);
+            taskBox.setPrefWidth(1003);
+            taskBox.setPrefHeight(40);
+            taskBox.setAlignment(Pos.CENTER);
+            taskBox.getChildren().addAll(nameLabel, doneButton);
+
+            customTaskListVBox.getChildren().add(taskBox);
+        }
     }
 }
