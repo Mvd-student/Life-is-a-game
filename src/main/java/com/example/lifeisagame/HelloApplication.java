@@ -3,6 +3,7 @@ package com.example.lifeisagame;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,6 +12,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HelloApplication extends Application {
+    private Stage stage;
+    private Scene scene;
+
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DailyTaskList.fxml")));
@@ -19,6 +23,39 @@ public class HelloApplication extends Application {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
 
         stage.setTitle("Life is a game - Daily Tasks");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToStore(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Store.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 960, 720);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Store");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToDailyTaskList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DailyTaskList.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 960, 720);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Daily Tasks");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToCustomTaskList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CustomTaskList.fxml")));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 960, 720);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/main.css")).toExternalForm());
+
+        stage.setTitle("Life is a game - Custom Tasks");
         stage.setScene(scene);
         stage.show();
     }
